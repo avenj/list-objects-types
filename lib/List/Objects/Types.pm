@@ -64,6 +64,12 @@ List::Objects::Types - Type::Tiny-based types for List::Objects::WithUtils
     default => sub { hash }
   );
 
+  has static_array => (
+    is  => 'ro',
+    isa => ImmutableArray,
+    default => sub { immarray(qw/ foo bar /) }
+  );
+
 =head1 DESCRIPTION
 
 A small set of L<Type::Tiny>-based types & coercions.
