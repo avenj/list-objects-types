@@ -1,0 +1,58 @@
+# NAME
+
+List::Objects::Types - Type::Tiny-based types for List::Objects::WithUtils
+
+# SYNOPSIS
+
+    package Foo;
+
+    use List::Objects::Types -all;
+    use List::Objects::WithUtils;
+    use Moo;
+
+    has my_array => (
+      is  => 'ro',
+      isa => ArrayObj,
+      default => sub { array }
+    );
+
+    has my_hash => (
+      is  => 'ro',
+      isa => HashObj,
+      default => sub { hash }
+    );
+
+    has static_array => (
+      is  => 'ro',
+      isa => ImmutableArray,
+      default => sub { immarray(qw/ foo bar /) }
+    );
+
+# DESCRIPTION
+
+A small set of [Type::Tiny](http://search.cpan.org/perldoc?Type::Tiny)\-based types & coercions.
+
+Also see [MoopsX::ListObjects](http://search.cpan.org/perldoc?MoopsX::ListObjects), which provides [Moops](http://search.cpan.org/perldoc?Moops) class-building sugar
+with [List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils) integration.
+
+### ArrayObj
+
+An object that consumes [List::Objects::WithUtils::Role::Array](http://search.cpan.org/perldoc?List::Objects::WithUtils::Role::Array).
+
+Can be coerced from a plain ARRAY; a shallow copy is performed.
+
+### HashObj
+
+An object that consumes [List::Objects::WithUtils::Role::Hash](http://search.cpan.org/perldoc?List::Objects::WithUtils::Role::Hash).
+
+Can be coerced from a plain HASH; a shallow copy is performed.
+
+### ImmutableArray
+
+An object that isa [List::Objects::WithUtils::Array::Immutable](http://search.cpan.org/perldoc?List::Objects::WithUtils::Array::Immutable).
+
+Can be coerced from a plain ARRAY; a shallow copy is performed.
+
+# AUTHOR
+
+Jon Portnoy <avenj@cobaltirc.org>
