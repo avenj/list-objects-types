@@ -3,6 +3,8 @@ use strict; use warnings FATAL => 'all';
 use Test::More;
 use Test::TypeTiny;
 
+use Types::Standard -types;
+
 use List::Objects::Types -all;
 use List::Objects::WithUtils;
 
@@ -18,5 +20,9 @@ should_fail [],  ArrayObj;
 should_fail +{}, HashObj;
 should_fail [],  ImmutableArray;
 should_fail array(), ImmutableArray;
+
+should_pass [],       (ArrayRef | ArrayObj);
+should_pass array(),  (ArrayRef | ArrayObj);
+should_fail 'foo',    (ArrayRef | ArrayObj);
 
 done_testing;
