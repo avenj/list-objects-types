@@ -51,7 +51,7 @@ Can be coerced from a plain HASH; a shallow copy is performed.
 
 An object that isa [List::Objects::WithUtils::Array::Immutable](http://search.cpan.org/perldoc?List::Objects::WithUtils::Array::Immutable).
 
-Can be coerced from a plain ARRAY; a shallow copy is performed.
+Can be coerced from a plain ARRAY or an ["ArrayObj"](#ArrayObj); a shallow copy is performed.
 
 # AUTHOR
 

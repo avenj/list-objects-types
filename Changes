@@ -1,5 +1,9 @@
 Revision history for Perl module List-Objects-Types
 
+0.002001 2013-08-30
+
+  - coerce ImmutableArray from ArrayObj
+
 0.001001 2013-08-23
 
-   - Initial release
+  - Initial release
