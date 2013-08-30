@@ -8,21 +8,23 @@ use Types::Standard -types;
 use List::Objects::WithUtils qw/array immarray hash/;
 
 declare ArrayObj =>
-  as Object,
+  as Object() =>
   where { $_->does('List::Objects::WithUtils::Role::Array') };
 
 coerce ArrayObj =>
-  from ArrayRef,
+  from ArrayRef() =>
   via { array(@$_) };
 
 
 declare ImmutableArray =>
-  as 'ArrayObj',
+  as ArrayObj =>
   where { $_->isa('List::Objects::WithUtils::Array::Immutable') };
 
 coerce ImmutableArray =>
-  from ArrayRef,
-  via { immarray(@$_) };
+  from ArrayRef() =>
+    via { immarray(@$_) },
+  from ArrayObj =>
+    via { immarray($_->all) };
 
 declare ImmutableArrayObj => as 'ImmutableArray';
 
@@ -93,7 +95,7 @@ Can be coerced from a plain HASH; a shallow copy is performed.
 
 An object that isa L<List::Objects::WithUtils::Array::Immutable>.
 
-Can be coerced from a plain ARRAY; a shallow copy is performed.
+Can be coerced from a plain ARRAY or an L</ArrayObj>; a shallow copy is performed.
 
 =head1 AUTHOR
 
