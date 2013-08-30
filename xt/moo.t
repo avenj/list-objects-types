@@ -6,6 +6,7 @@ use strict; use warnings FATAL => 'all';
   use List::Objects::Types -all;
   use List::Objects::WithUtils;
   use Moo;
+  use MooX::late;
 
   has myarray => (
     is  => 'ro',
@@ -24,6 +25,13 @@ use strict; use warnings FATAL => 'all';
     isa => HashObj,
     default => sub { hash },
   );
+
+  has mycoercible => (
+    is  => 'ro',
+    isa => ArrayObj,
+    coerce => 1,
+    default => sub { [] },
+  );
 }
 
 my $foo = Foo->new;
@@ -33,5 +41,7 @@ ok $foo->myimmarray->isa('List::Objects::WithUtils::Array::Immutable'),
   '->immarray() ok';
 ok $foo->myhash->does('List::Objects::WithUtils::Role::Hash'),
   '->hash() ok';
+ok $foo->mycoercible->does('List::Objects::WithUtils::Role::Array'),
+  '->mycoercible ok';
 
 done_testing;
