@@ -29,6 +29,11 @@ coerce ImmutableArray =>
 declare ImmutableArrayObj => as 'ImmutableArray';
 
 
+declare TypedArray =>
+  as Object() =>
+  where { $_->isa('List::Objects::WithUtils::Array::Typed') };
+
+
 declare HashObj =>
   as Object,
   where { $_->does('List::Objects::WithUtils::Role::Hash') };
@@ -96,6 +101,12 @@ Can be coerced from a plain HASH; a shallow copy is performed.
 An object that isa L<List::Objects::WithUtils::Array::Immutable>.
 
 Can be coerced from a plain ARRAY or an L</ArrayObj>; a shallow copy is performed.
+
+=head3 TypedArray
+
+An object that isa L<List::Objects::WithUtils::Array::Typed>.
+
+Not coercible.
 
 =head1 AUTHOR
 
