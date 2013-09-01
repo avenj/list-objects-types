@@ -1,8 +1,12 @@
 Revision history for Perl module List-Objects-Types
 
+0.003001 2013-09-01
+
+  - Add type: TypedArray
+
 0.002001 2013-08-30
 
-  - coerce ImmutableArray from ArrayObj
+  - Add coercion: ImmutableArray from ArrayObj
 
 0.001001 2013-08-23
 

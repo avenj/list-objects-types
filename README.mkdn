@@ -53,6 +53,12 @@ An object that isa [List::Objects::WithUtils::Array::Immutable](http://search.cp
 
 Can be coerced from a plain ARRAY or an ["ArrayObj"](#ArrayObj); a shallow copy is performed.
 
+### TypedArray
+
+An object that isa [List::Objects::WithUtils::Array::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Array::Typed).
+
+Not coercible.
+
 # AUTHOR
 
 Jon Portnoy <avenj@cobaltirc.org>
