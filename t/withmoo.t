@@ -1,3 +1,12 @@
+BEGIN {
+  unless (eval {; require Moo; require MooX::late; 1 } && !$@) {
+    require Test::More;
+    Test::More::plan(skip_all =>
+      'these tests require Moo and MooX::late'
+    );
+  }
+}
+
 use Test::More;
 use strict; use warnings FATAL => 'all';
 
