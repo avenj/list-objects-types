@@ -59,6 +59,18 @@ An object that isa [List::Objects::WithUtils::Array::Typed](http://search.cpan.o
 
 Not coercible.
 
+### TypedArray\[\`a\]
+
+TypedArray can be parameterized with another type constraint. For
+example, the type constraint `TypedArray[Num]` will accept
+`array_of(Num, 1, 2, 3.14159)`, and will also accept
+`array_of(Int, 1, 2, 3)` because `Int` is a subtype of `Num`.
+
+Can be coerced from a plain ARRAY or an ["ArrayObj"](#ArrayObj); a shallow copy is
+performed. If the parameter also has a coercion, this will be applied
+to each item in the new array.
+
 # AUTHOR
 
-Jon Portnoy <avenj@cobaltirc.org>
+Jon Portnoy <avenj@cobaltirc.org> with significant helpful contributions from
+Toby Inkster (CPAN: TOBYINK)
