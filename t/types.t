@@ -56,4 +56,13 @@ ok is_ImmutableArray($coerced), 'ArrayObj coerced to ImmutableArray ok';
 $coerced = HashObj->coerce(+{});
 ok $coerced->keys->count == 0, 'HashRef coerced to HashObj ok';
 
+my $RoundedInt = Int->plus_coercions(Num, 'int($_)');
+$coerced = (TypedArray[$RoundedInt])->coerce([ 1, 2, 3, 4.1 ]);
+should_pass $coerced, TypedArray[Int];
+is_deeply(
+	[ $coerced->all ],
+	[ 1..4 ],
+	'inner coercions worked',
+);
+
 done_testing;
