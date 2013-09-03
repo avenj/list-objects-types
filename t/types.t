@@ -60,9 +60,9 @@ my $RoundedInt = Int->plus_coercions(Num, 'int($_)');
 $coerced = (TypedArray[$RoundedInt])->coerce([ 1, 2, 3, 4.1 ]);
 should_pass $coerced, TypedArray[Int];
 is_deeply(
-	[ $coerced->all ],
-	[ 1..4 ],
-	'inner coercions worked',
+  [  $coerced->all ],
+  [ 1..4 ],
+  'inner coercions worked',
 );
 
 done_testing;
