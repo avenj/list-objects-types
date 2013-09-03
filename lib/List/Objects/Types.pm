@@ -8,8 +8,7 @@ use Types::Standard -types;
 use List::Objects::WithUtils qw/array immarray hash/;
 
 declare ArrayObj =>
-  as Object() =>
-  where { $_->does('List::Objects::WithUtils::Role::Array') };
+  as ConsumerOf[ 'List::Objects::WithUtils::Role::Array' ];
 
 coerce ArrayObj =>
   from ArrayRef() =>
@@ -18,7 +17,8 @@ coerce ArrayObj =>
 
 declare ImmutableArray =>
   as ArrayObj =>
-  where { $_->isa('List::Objects::WithUtils::Array::Immutable') };
+  where { $_->isa('List::Objects::WithUtils::Array::Immutable') },
+  inline_as { (undef, qq[$_->isa('List::Objects::WithUtils::Array::Immutable')]) };
 
 coerce ImmutableArray =>
   from ArrayRef() =>
@@ -30,13 +30,11 @@ declare ImmutableArrayObj => as 'ImmutableArray';
 
 
 declare TypedArray =>
-  as Object() =>
-  where { $_->isa('List::Objects::WithUtils::Array::Typed') };
+  as InstanceOf[ 'List::Objects::WithUtils::Array::Typed' ];
 
 
 declare HashObj =>
-  as Object,
-  where { $_->does('List::Objects::WithUtils::Role::Hash') };
+  as ConsumerOf[ 'List::Objects::WithUtils::Role::Hash' ];
 
 coerce HashObj =>
   from HashRef,
