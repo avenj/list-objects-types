@@ -132,6 +132,17 @@ An object that isa L<List::Objects::WithUtils::Array::Typed>.
 
 Not coercible.
 
+=head3 TypedArray[`a]
+
+TypedArray can be parameterized with another type constraint. For
+example, the type constraint C<< TypedArray[Num] >> will accept
+C<< array_of(Num, 1, 2, 3.14159) >>, and will also accept
+C<< array_of(Int, 1, 2, 3) >> because C<Int> is a subtype of C<Num>.
+
+Can be coerced from a plain ARRAY or an L</ArrayObj>; a shallow copy is
+performed. If the parameter also has a coercion, this will be applied
+to each item in the new array.
+
 =head1 AUTHOR
 
 Jon Portnoy <avenj@cobaltirc.org>
