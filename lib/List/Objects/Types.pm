@@ -4,12 +4,13 @@ use strict; use warnings FATAL => 'all';
 use Type::Library -base;
 use Type::Utils   -all;
 use Types::Standard -types;
+use Types::TypeTiny 'to_TypeTiny';
 
 use List::Objects::WithUtils qw/array immarray hash/;
+use List::Objects::WithUtils::Array::Typed qw/array_of/;
 
 declare ArrayObj =>
-  as Object() =>
-  where { $_->does('List::Objects::WithUtils::Role::Array') };
+  as ConsumerOf[ 'List::Objects::WithUtils::Role::Array' ];
 
 coerce ArrayObj =>
   from ArrayRef() =>
@@ -18,7 +19,8 @@ coerce ArrayObj =>
 
 declare ImmutableArray =>
   as ArrayObj =>
-  where { $_->isa('List::Objects::WithUtils::Array::Immutable') };
+  where { $_->isa('List::Objects::WithUtils::Array::Immutable') },
+  inline_as { (undef, qq[$_->isa('List::Objects::WithUtils::Array::Immutable')]) };
 
 coerce ImmutableArray =>
   from ArrayRef() =>
@@ -30,13 +32,35 @@ declare ImmutableArrayObj => as 'ImmutableArray';
 
 
 declare TypedArray =>
-  as Object() =>
-  where { $_->isa('List::Objects::WithUtils::Array::Typed') };
+  as InstanceOf[ 'List::Objects::WithUtils::Array::Typed' ],
+  constraint_generator => sub {
+    my $param = to_TypeTiny(shift);
+    return sub { $_->{type}->is_a_type_of($param) };
+  },
+  coercion_generator => sub {
+    my ($parent, $child, $param) = @_;
+    my $c = Type::Coercion->new(type_constraint => $child);
+    if ($param->has_coercion)
+    {
+      my $inner = $param->coercion;
+      $c->add_type_coercions(
+        ArrayRef() => sub { array_of($param, map { $inner->coerce($_) } @$_) },
+        ArrayObj() => sub { array_of($param, map { $inner->coerce($_) } $_->all) },
+      );
+    }
+    else
+    {
+      $c->add_type_coercions(
+        ArrayRef() => sub { array_of($param, @$_) },
+        ArrayObj() => sub { array_of($param, $_->all) },
+      );
+    }
+    return $c->freeze;
+  };
 
 
 declare HashObj =>
-  as Object,
-  where { $_->does('List::Objects::WithUtils::Role::Hash') };
+  as ConsumerOf[ 'List::Objects::WithUtils::Role::Hash' ];
 
 coerce HashObj =>
   from HashRef,
@@ -107,6 +131,17 @@ Can be coerced from a plain ARRAY or an L</ArrayObj>; a shallow copy is performe
 An object that isa L<List::Objects::WithUtils::Array::Typed>.
 
 Not coercible.
+
+=head3 TypedArray[`a]
+
+TypedArray can be parameterized with another type constraint. For
+example, the type constraint C<< TypedArray[Num] >> will accept
+C<< array_of(Num, 1, 2, 3.14159) >>, and will also accept
+C<< array_of(Int, 1, 2, 3) >> because C<Int> is a subtype of C<Num>.
+
+Can be coerced from a plain ARRAY or an L</ArrayObj>; a shallow copy is
+performed. If the parameter also has a coercion, this will be applied
+to each item in the new array.
 
 =head1 AUTHOR
 
