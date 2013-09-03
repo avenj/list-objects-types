@@ -145,6 +145,7 @@ to each item in the new array.
 
 =head1 AUTHOR
 
-Jon Portnoy <avenj@cobaltirc.org>
+Jon Portnoy <avenj@cobaltirc.org> with significant helpful contributions from
+Toby Inkster (CPAN: TOBYINK)
 
 =cut
