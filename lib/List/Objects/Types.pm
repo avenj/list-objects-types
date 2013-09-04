@@ -6,7 +6,12 @@ use Type::Utils   -all;
 use Types::Standard -types;
 use Types::TypeTiny 'to_TypeTiny';
 
-use List::Objects::WithUtils qw/array immarray hash array_of/;
+use List::Objects::WithUtils qw/
+  array
+  array_of
+  immarray 
+  hash
+/;
 
 declare ArrayObj =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Array' ];
@@ -34,27 +39,25 @@ declare TypedArray =>
   as InstanceOf[ 'List::Objects::WithUtils::Array::Typed' ],
   constraint_generator => sub {
     my $param = to_TypeTiny(shift);
-    return sub { $_->{type}->is_a_type_of($param) };
+    return sub { $_->{type}->is_a_type_of($param) }
   },
   coercion_generator => sub {
     my ($parent, $child, $param) = @_;
     my $c = Type::Coercion->new(type_constraint => $child);
-    if ($param->has_coercion)
-    {
+    if ($param->has_coercion) {
       my $inner = $param->coercion;
       $c->add_type_coercions(
         ArrayRef() => sub { array_of($param, map { $inner->coerce($_) } @$_) },
         ArrayObj() => sub { array_of($param, map { $inner->coerce($_) } $_->all) },
       );
-    }
-    else
-    {
+    } else {
       $c->add_type_coercions(
         ArrayRef() => sub { array_of($param, @$_) },
         ArrayObj() => sub { array_of($param, $_->all) },
       );
     }
-    return $c->freeze;
+
+    return $c->freeze
   };
 
 
