@@ -21,7 +21,7 @@ coerce ArrayObj =>
 
 
 declare ImmutableArray =>
-  as ArrayObj() =>
+  as ArrayObj(),
   where     { $_->isa('List::Objects::WithUtils::Array::Immutable') },
   inline_as { (undef, qq[$_->isa('List::Objects::WithUtils::Array::Immutable')]) };
 
@@ -78,6 +78,7 @@ List::Objects::Types - Type::Tiny-based types for List::Objects::WithUtils
   use List::Objects::Types -all;
   use List::Objects::WithUtils;
   use Moo;
+  use MooX::late;
 
   has my_array => (
     is  => 'ro',
@@ -85,21 +86,34 @@ List::Objects::Types - Type::Tiny-based types for List::Objects::WithUtils
     default => sub { array }
   );
 
-  has my_hash => (
-    is  => 'ro',
-    isa => HashObj,
-    default => sub { hash }
-  );
-
   has static_array => (
     is  => 'ro',
     isa => ImmutableArray,
-    default => sub { immarray(qw/ foo bar /) }
+    coerce  => 1,
+    default => sub { [qw/ foo bar /] }
+  );
+
+  has my_hash => (
+    is  => 'ro',
+    isa => HashObj,
+    coerce  => 1,
+    # Coercible from a plain HASH:
+    default => sub { +{} }
+  );
+
+  use Types::Standard 'Int', 'Num';
+  has my_ints => (
+    is  => 'ro',
+    # Nums added to this array_of(Int) are coerced to Ints:
+    isa => TypedArray[ Int->plus_coercions(Num, 'int($_)') ],
+    coerce  => 1,
+    default => sub { [1, 2, 3.14] }
   );
 
 =head1 DESCRIPTION
 
-A small set of L<Type::Tiny>-based types & coercions.
+A small set of L<Type::Tiny>-based types & coercions for
+L<List::Objects::WithUtils>.
 
 Also see L<MoopsX::ListObjects>, which provides L<Moops> class-building sugar
 with L<List::Objects::WithUtils> integration.
