@@ -6,8 +6,9 @@ use strict; use warnings FATAL => 'all';
 package Foo {
   use Moo;
   use MooX::late;
+
   use List::Objects::Types 'TypedArray';
-  use Types::Standard qw/ Int Num /;
+  use Types::Standard      'Int', 'Num';
 
   has integers => (
     is     => 'ro',
