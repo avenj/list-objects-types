@@ -6,8 +6,7 @@ use Type::Utils   -all;
 use Types::Standard -types;
 use Types::TypeTiny 'to_TypeTiny';
 
-use List::Objects::WithUtils qw/array immarray hash/;
-use List::Objects::WithUtils::Array::Typed qw/array_of/;
+use List::Objects::WithUtils qw/array immarray hash array_of/;
 
 declare ArrayObj =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Array' ];
