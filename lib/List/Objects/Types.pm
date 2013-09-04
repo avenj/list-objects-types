@@ -21,7 +21,7 @@ coerce ArrayObj =>
 
 
 declare ImmutableArray =>
-  as ArrayObj =>
+  as ArrayObj() =>
   where     { $_->isa('List::Objects::WithUtils::Array::Immutable') },
   inline_as { (undef, qq[$_->isa('List::Objects::WithUtils::Array::Immutable')]) };
 
@@ -141,7 +141,7 @@ to each item in the new array.
 
 =head1 AUTHOR
 
-Jon Portnoy <avenj@cobaltirc.org> with significant helpful contributions from
-Toby Inkster (CPAN: TOBYINK)
+Jon Portnoy <avenj@cobaltirc.org> with significant contributions from Toby
+Inkster (CPAN: TOBYINK)
 
 =cut
