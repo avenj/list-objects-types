@@ -9,6 +9,7 @@ List::Objects::Types - Type::Tiny-based types for List::Objects::WithUtils
     use List::Objects::Types -all;
     use List::Objects::WithUtils;
     use Moo;
+    use MooX::late;
 
     has my_array => (
       is  => 'ro',
@@ -16,21 +17,34 @@ List::Objects::Types - Type::Tiny-based types for List::Objects::WithUtils
       default => sub { array }
     );
 
-    has my_hash => (
-      is  => 'ro',
-      isa => HashObj,
-      default => sub { hash }
-    );
-
     has static_array => (
       is  => 'ro',
       isa => ImmutableArray,
-      default => sub { immarray(qw/ foo bar /) }
+      coerce  => 1,
+      default => sub { [qw/ foo bar /] }
+    );
+
+    has my_hash => (
+      is  => 'ro',
+      isa => HashObj,
+      coerce  => 1,
+      # Coercible from a plain HASH:
+      default => sub { +{} }
+    );
+
+    use Types::Standard 'Int', 'Num';
+    has my_ints => (
+      is  => 'ro',
+      # Nums added to this array_of(Int) are coerced to Ints:
+      isa => TypedArray[ Int->plus_coercions(Num, 'int($_)') ],
+      coerce  => 1,
+      default => sub { [1, 2, 3.14] }
     );
 
 # DESCRIPTION
 
-A small set of [Type::Tiny](http://search.cpan.org/perldoc?Type::Tiny)\-based types & coercions.
+A small set of [Type::Tiny](http://search.cpan.org/perldoc?Type::Tiny)\-based types & coercions for
+[List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils).
 
 Also see [MoopsX::ListObjects](http://search.cpan.org/perldoc?MoopsX::ListObjects), which provides [Moops](http://search.cpan.org/perldoc?Moops) class-building sugar
 with [List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils) integration.
@@ -70,7 +84,10 @@ Can be coerced from a plain ARRAY or an ["ArrayObj"](#ArrayObj); a shallow copy 
 performed. If the parameter also has a coercion, this will be applied
 to each item in the new array.
 
+(The `examples/` directory that comes with this distribution contains some
+examples of parameterized & coercible TypedArrays.)
+
 # AUTHOR
 
-Jon Portnoy <avenj@cobaltirc.org> with significant helpful contributions from
-Toby Inkster (CPAN: TOBYINK)
+Jon Portnoy <avenj@cobaltirc.org> with significant contributions from Toby
+Inkster (CPAN: TOBYINK)
