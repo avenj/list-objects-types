@@ -139,6 +139,9 @@ Can be coerced from a plain ARRAY or an L</ArrayObj>; a shallow copy is
 performed. If the parameter also has a coercion, this will be applied
 to each item in the new array.
 
+(The C<examples/> directory that comes with this distribution contains some
+examples of parameterized & coercible TypedArrays.)
+
 =head1 AUTHOR
 
 Jon Portnoy <avenj@cobaltirc.org> with significant contributions from Toby
