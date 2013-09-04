@@ -17,22 +17,17 @@ declare ArrayObj =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Array' ];
 
 coerce ArrayObj =>
-  from ArrayRef() =>
-  via { array(@$_) };
+  from ArrayRef() => via { array(@$_) };
 
 
 declare ImmutableArray =>
   as ArrayObj =>
-  where { $_->isa('List::Objects::WithUtils::Array::Immutable') },
+  where     { $_->isa('List::Objects::WithUtils::Array::Immutable') },
   inline_as { (undef, qq[$_->isa('List::Objects::WithUtils::Array::Immutable')]) };
 
 coerce ImmutableArray =>
-  from ArrayRef() =>
-    via { immarray(@$_) },
-  from ArrayObj =>
-    via { immarray($_->all) };
-
-declare ImmutableArrayObj => as 'ImmutableArray';
+  from ArrayRef() => via { immarray(@$_) },
+  from ArrayObj() => via { immarray($_->all) };
 
 
 declare TypedArray =>
@@ -47,8 +42,8 @@ declare TypedArray =>
     if ($param->has_coercion) {
       my $inner = $param->coercion;
       $c->add_type_coercions(
-        ArrayRef() => sub { array_of($param, map { $inner->coerce($_) } @$_) },
-        ArrayObj() => sub { array_of($param, map { $inner->coerce($_) } $_->all) },
+        ArrayRef() => sub { array_of($param, map {; $inner->coerce($_) } @$_) },
+        ArrayObj() => sub { array_of($param, map {; $inner->coerce($_) } $_->all) },
       );
     } else {
       $c->add_type_coercions(
@@ -65,8 +60,7 @@ declare HashObj =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Hash' ];
 
 coerce HashObj =>
-  from HashRef,
-  via { hash(%$_) };
+  from HashRef() => via { hash(%$_) };
 
 1;
 

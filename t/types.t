@@ -52,6 +52,8 @@ ok $coerced->count == 0, 'ArrayRef coerced to ArrayObj ok';
 
 $coerced = ImmutableArray->coerce($coerced);
 ok is_ImmutableArray($coerced), 'ArrayObj coerced to ImmutableArray ok';
+$coerced = ImmutableArray->coerce([]);
+ok is_ImmutableArray($coerced), 'ArrayRef coerced to ImmutableArray ok';
 
 $coerced = HashObj->coerce(+{});
 ok $coerced->keys->count == 0, 'HashRef coerced to HashObj ok';
