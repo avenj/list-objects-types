@@ -4,7 +4,7 @@ use strict; use warnings FATAL => 'all';
 use Type::Library -base;
 use Type::Utils   -all;
 use Types::Standard -types;
-use Types::TypeTiny 'to_TypeTiny';
+use Types::TypeTiny ();
 
 use List::Objects::WithUtils qw/
   array
@@ -33,7 +33,7 @@ coerce ImmutableArray =>
 declare TypedArray =>
   as InstanceOf[ 'List::Objects::WithUtils::Array::Typed' ],
   constraint_generator => sub {
-    my $param = to_TypeTiny(shift);
+    my $param = Types::TypeTiny::to_TypeTiny(shift);
     return sub { $_->type->is_a_type_of($param) }
   },
   coercion_generator => sub {
