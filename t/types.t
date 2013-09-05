@@ -66,7 +66,17 @@ should_pass $coerced, TypedArray[Int];
 is_deeply(
   [  $coerced->all ],
   [ 1..4 ],
-  'inner coercions worked',
+  'TypedArray inner coercions worked',
+);
+
+$coerced = (TypedHash[$RoundedInt])->coerce(
+  { foo => 1, bar => 2, baz => 3.14}
+);
+should_pass $coerced, TypedHash[Int];
+is_deeply(
+  +{ $coerced->export },
+  +{ foo => 1, bar => 2, baz => 3 },
+  'TypedHash inner coercions worked'
 );
 
 done_testing;
