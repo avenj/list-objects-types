@@ -1,5 +1,9 @@
 Revision history for Perl module List-Objects-Types
 
+0.005001 2013-09-05
+
+  - Add TypedHash
+
 0.004004 2013-09-05
 
   - Explicitly depend on List::Objects::WithUtils-1.011

@@ -87,6 +87,20 @@ to each item in the new array.
 (The `examples/` directory that comes with this distribution contains some
 examples of parameterized & coercible TypedArrays.)
 
+### TypedHash
+
+An object that isa [List::Objects::WithUtils::Hash::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Hash::Typed).
+
+Not coercible.
+
+### TypedHash\[\`a\]
+
+TypedHash can be parameterized with another type constraint, like
+["TypedArray"](#TypedArray).
+
+Can be coerced from a plain HASH or a ["HashObj"](#HashObj). If the parameter also has a
+coercion, this will be applied to each value in the new hash.
+
 # AUTHOR
 
 Jon Portnoy <avenj@cobaltirc.org> with significant contributions from Toby
