@@ -1,5 +1,10 @@
 Revision history for Perl module List-Objects-Types
 
+0.004004 2013-09-05
+
+  - Explicitly depend on List::Objects::WithUtils-1.011
+    (fixes TypedArrays)
+
 0.004003 2013-09-05
 
   - Fix TypedArray to work with latest List::Objects::WithUtils
