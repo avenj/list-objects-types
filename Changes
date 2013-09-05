@@ -1,5 +1,9 @@
 Revision history for Perl module List-Objects-Types
 
+0.004003 2013-09-05
+
+  - Fix TypedArray to work with latest List::Objects::WithUtils
+
 0.004002 2013-09-04
 
   - Add TOBYINK's TypedArray examples to examples/
