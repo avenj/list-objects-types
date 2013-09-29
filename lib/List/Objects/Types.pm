@@ -23,8 +23,10 @@ coerce ArrayObj =>
 
 declare ImmutableArray =>
   as ArrayObj(),
-  where     { $_->isa('List::Objects::WithUtils::Array::Immutable') },
-  inline_as { (undef, qq[$_->isa('List::Objects::WithUtils::Array::Immutable')]) };
+  where     { $_->does('List::Objects::WithUtils::Role::Array::Immutable') },
+  inline_as { 
+    (undef, qq[$_->does('List::Objects::WithUtils::Role::Array::Immutable')]) 
+  };
 
 coerce ImmutableArray =>
   from ArrayRef() => via { immarray(@$_) },
@@ -32,7 +34,7 @@ coerce ImmutableArray =>
 
 
 declare TypedArray =>
-  as InstanceOf[ 'List::Objects::WithUtils::Array::Typed' ],
+  as ConsumerOf[ 'List::Objects::WithUtils::Role::Array::Typed' ],
   constraint_generator => sub {
     my $param = Types::TypeTiny::to_TypeTiny(shift);
     return sub { $_->type->is_a_type_of($param) }
@@ -65,7 +67,7 @@ coerce HashObj =>
 
 
 declare TypedHash =>
-  as InstanceOf[ 'List::Objects::WithUtils::Hash::Typed' ],
+  as ConsumerOf[ 'List::Objects::WithUtils::Role::Hash::Typed' ],
   constraint_generator => sub {
     my $param = Types::TypeTiny::to_TypeTiny(shift);
     return sub { $_->type->is_a_type_of($param) }
