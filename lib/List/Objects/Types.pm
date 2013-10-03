@@ -6,13 +6,8 @@ use Type::Utils   -all;
 use Types::Standard -types;
 use Types::TypeTiny ();
 
-use List::Objects::WithUtils qw/
-  array
-  array_of
-  immarray 
-  hash
-  hash_of
-/;
+use List::Objects::WithUtils;
+
 
 declare ArrayObj =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Array' ];
@@ -66,6 +61,17 @@ coerce HashObj =>
   from HashRef() => via { hash(%$_) };
 
 
+declare ImmutableHash =>
+  as HashObj(),
+  where     { $_->does('List::Objects::WithUtils::Role::Hash::Immutable') },
+  inline_as {
+    (undef, qq[$_->does('List::Objects::WithUtils::Role::Hash::Immutable')])
+  };
+
+coerce ImmutableHash =>
+  from HashRef() => via { immhash(@$_) },
+  from HashObj() => via { immhash($_->export) },
+
 declare TypedHash =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Hash::Typed' ],
   constraint_generator => sub {
@@ -78,8 +84,16 @@ declare TypedHash =>
     if ($param->has_coercion) {
       my $inner = $param->coercion;
       $c->add_type_coercions(
-        HashRef() => sub { hash_of($param)->set(%$_) },
-        HashObj() => sub { hash_of($param)->set( $_->export ) },
+        HashRef() => sub {
+          my %old = %$_; my %new;
+          @new{keys %old} = map {; $inner->coerce($_) } values %old;
+          hash_of($param, %new)
+        },
+        HashObj() => sub { 
+          my %old = $_->export; my %new;
+          @new{keys %old} = map {; $inner->coerce($_) } values %old;
+          hash_of($param, %new)
+        },
       );
     } else {
       $c->add_type_coercions(
