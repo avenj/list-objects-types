@@ -69,8 +69,9 @@ declare ImmutableHash =>
   };
 
 coerce ImmutableHash =>
-  from HashRef() => via { immhash(@$_) },
-  from HashObj() => via { immhash($_->export) },
+  from HashRef() => via { immhash(%$_) },
+  from HashObj() => via { immhash($_->export) };
+
 
 declare TypedHash =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Hash::Typed' ],
