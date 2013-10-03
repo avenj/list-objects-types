@@ -85,8 +85,16 @@ is_deeply(
   'TypedArray inner coercions worked',
 );
 
+$coerced = (ImmutableTypedArray[$RoundedInt])->coerce([ 1, 2, 3, 4.1 ]);
+should_pass $coerced, ImmutableTypedArray[Int];
+is_deeply(
+  [ $coerced->all ],
+  [ 1 .. 4 ],
+  'ImmutableTypedArray'
+);
+
 $coerced = (TypedHash[$RoundedInt])->coerce(
-  { foo => 1, bar => 2, baz => 3.14}
+  +{ foo => 1, bar => 2, baz => 3.14}
 );
 should_pass $coerced, TypedHash[Int];
 is_deeply(
@@ -94,5 +102,16 @@ is_deeply(
   +{ foo => 1, bar => 2, baz => 3 },
   'TypedHash inner coercions worked'
 );
+
+$coerced = (ImmutableTypedHash[$RoundedInt])->coerce(
+  +{ foo => 1, bar => 2, baz => 3.14 }
+);
+should_pass $coerced, ImmutableTypedHash[Int];
+is_deeply(
+  +{ $coerced->export },
+  +{ foo => 1, bar => 2, baz => 3 },
+  'ImmutableTypedHash inner coercions worked',
+);
+
 
 done_testing;
