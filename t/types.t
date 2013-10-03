@@ -6,13 +6,7 @@ use Test::TypeTiny;
 use Types::Standard -types;
 
 use List::Objects::Types -all;
-use List::Objects::WithUtils qw/
-  array
-  array_of
-  immarray
-  hash
-  hash_of
-/;
+use List::Objects::WithUtils;
 
 # array/hash
 should_pass array(), ArrayObj;
@@ -22,6 +16,11 @@ should_pass hash(),  HashObj;
 ok_subtype ArrayObj, ImmutableArray;
 should_pass immarray(), ArrayObj;
 should_pass immarray(), ImmutableArray;
+
+# immhash
+ok_subtype HashObj, ImmutableHash;
+should_pass immhash(), HashObj;
+should_pass immhash(), ImmutableHash;
 
 # array_of
 my $typed = array_of(Int() => 1 .. 4);
@@ -58,6 +57,7 @@ should_fail 'foo',    (ArrayRef | ArrayObj);
 ok is_ArrayObj(array), 'is_ArrayObj ok';
 ok is_HashObj(hash),   'is_HashObj ok';
 ok is_ImmutableArray(immarray), 'is_ImmutableArray ok';
+ok is_ImmutableHash(immhash), 'is_ImmutableHash ok';
 
 # coercions
 my $coerced = ArrayObj->coerce([]);
@@ -68,8 +68,13 @@ ok is_ImmutableArray($coerced), 'ArrayObj coerced to ImmutableArray ok';
 $coerced = ImmutableArray->coerce([]);
 ok is_ImmutableArray($coerced), 'ArrayRef coerced to ImmutableArray ok';
 
-$coerced = HashObj->coerce(+{});
-ok $coerced->keys->count == 0, 'HashRef coerced to HashObj ok';
+$coerced = HashObj->coerce(+{foo => 1});
+ok $coerced->keys->count == 1, 'HashRef coerced to HashObj ok';
+
+$coerced = ImmutableHash->coerce($coerced);
+ok $coerced->keys->count == 1, 'HashObj coerced to ImmutableHash ok';
+$coerced = ImmutableHash->coerce(+{foo => 1});
+ok $coerced->keys->count == 1, 'HashRef coerced to ImmutableHash ok';
 
 my $RoundedInt = Int->plus_coercions(Num, 'int($_)');
 $coerced = (TypedArray[$RoundedInt])->coerce([ 1, 2, 3, 4.1 ]);
