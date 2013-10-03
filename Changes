@@ -1,5 +1,10 @@
 Revision history for Perl module List-Objects-Types
 
+0.006001 2013-10-03
+
+  - Updated for List::Objects::WithUtils 2.0;
+    adds ImmutableTypedArray / ImmutableTypedHash
+
 0.005001 2013-09-05
 
   - Add TypedHash

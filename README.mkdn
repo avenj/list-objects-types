@@ -63,13 +63,13 @@ Can be coerced from a plain HASH; a shallow copy is performed.
 
 ### ImmutableArray
 
-An object that isa [List::Objects::WithUtils::Array::Immutable](http://search.cpan.org/perldoc?List::Objects::WithUtils::Array::Immutable).
+An object that consumes [List::Objects::WithUtils::Role::Array::Immutable](http://search.cpan.org/perldoc?List::Objects::WithUtils::Role::Array::Immutable).
 
 Can be coerced from a plain ARRAY or an ["ArrayObj"](#ArrayObj); a shallow copy is performed.
 
 ### TypedArray
 
-An object that isa [List::Objects::WithUtils::Array::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Array::Typed).
+An object that consumes [List::Objects::WithUtils::Role::Array::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Role::Array::Typed).
 
 Not coercible.
 
@@ -87,9 +87,22 @@ to each item in the new array.
 (The `examples/` directory that comes with this distribution contains some
 examples of parameterized & coercible TypedArrays.)
 
+### ImmutableTypedArray
+
+An object that isa [List::Objects::WithUtils::Array::Immutable::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Array::Immutable::Typed).
+
+Not coercible.
+
+### ImmutableTypedArray\[\`a\]
+
+ImmutableTypedArray can be parameterized with another type constraint, like
+["TypedArray"](#TypedArray).
+
+Can be coerced from a plain ARRAY or an ["ArrayObj"](#ArrayObj).
+
 ### TypedHash
 
-An object that isa [List::Objects::WithUtils::Hash::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Hash::Typed).
+An object that consumes [List::Objects::WithUtils::Role::Hash::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Role::Hash::Typed).
 
 Not coercible.
 
@@ -100,6 +113,19 @@ TypedHash can be parameterized with another type constraint, like
 
 Can be coerced from a plain HASH or a ["HashObj"](#HashObj). If the parameter also has a
 coercion, this will be applied to each value in the new hash.
+
+### ImmutableTypedHash
+
+An object that isa [List::Objects::WithUtils::Hash::Immutable::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Hash::Immutable::Typed).
+
+Not coercible.
+
+### ImmutableTypedHash\[\`a\]
+
+ImmutableTypedHash can be parameterized with another type constraint, like
+["TypedHash"](#TypedHash).
+
+Can be coerced from a plain HASH or an ["HashObj"](#HashObj).
 
 # AUTHOR
 
