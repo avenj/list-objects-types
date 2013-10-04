@@ -5,6 +5,13 @@ BEGIN {
       'these tests require Moo and MooX::late'
     );
   }
+
+  unless (eval {; MooX::late->VERSION(0.014) }) {
+    require Test::More;
+    Test::More::plan(skip_all =>
+      'these tests require MooX::late-0.014 or newer'
+    );
+  }
 }
 
 use Test::More;
