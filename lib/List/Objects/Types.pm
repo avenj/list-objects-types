@@ -1,12 +1,12 @@
 package List::Objects::Types;
 use strict; use warnings FATAL => 'all';
 
-use Type::Library -base;
-use Type::Utils   -all;
+use Type::Library   -base;
+use Type::Utils     -all;
 use Types::Standard -types;
 use Types::TypeTiny ();
 
-use List::Objects::WithUtils;
+use List::Objects::WithUtils 2;
 
 
 declare ArrayObj =>
