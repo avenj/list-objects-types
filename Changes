@@ -1,5 +1,9 @@
 Revision history for Perl module List-Objects-Types
 
+1.001001 2013-12-19
+
+  - Bump to 1.x, interface should be fairly static
+
 0.006001 2013-10-03
 
   - Updated for List::Objects::WithUtils 2.0;
