@@ -6,7 +6,7 @@ use Type::Utils     -all;
 use Types::Standard -types;
 use Types::TypeTiny ();
 
-use List::Objects::WithUtils 2;
+use List::Objects::WithUtils;
 
 
 declare ArrayObj =>
