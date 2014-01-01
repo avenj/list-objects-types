@@ -32,7 +32,7 @@ declare TypedArray =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Array::Typed' ],
   constraint_generator => sub {
     my $param = Types::TypeTiny::to_TypeTiny(shift);
-    return sub { $_->type->is_a_type_of($param) }
+    sub { $_->type->is_a_type_of($param) }
   },
   coercion_generator => sub {
     my ($parent, $child, $param) = @_;
@@ -50,14 +50,14 @@ declare TypedArray =>
       );
     }
 
-    return $c->freeze
+    $c->freeze
   };
 
 declare ImmutableTypedArray =>
   as InstanceOf[ 'List::Objects::WithUtils::Array::Immutable::Typed' ],
   constraint_generator => sub {
     my $param = Types::TypeTiny::to_TypeTiny(shift);
-    return sub { $_->type->is_a_type_of($param) }
+    sub { $_->type->is_a_type_of($param) }
   },
   coercion_generator => sub {
     my ($parent, $child, $param) = @_;
@@ -103,7 +103,7 @@ declare TypedHash =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Hash::Typed' ],
   constraint_generator => sub {
     my $param = Types::TypeTiny::to_TypeTiny(shift);
-    return sub { $_->type->is_a_type_of($param) }
+    sub { $_->type->is_a_type_of($param) }
   },
   coercion_generator => sub {
     my ($parent, $child, $param) = @_;
@@ -130,7 +130,7 @@ declare TypedHash =>
     }
 
  
-    return $c->freeze
+    $c->freeze
   };
 
 
@@ -138,7 +138,7 @@ declare ImmutableTypedHash =>
   as InstanceOf[ 'List::Objects::WithUtils::Hash::Immutable::Typed' ],
   constraint_generator => sub {
     my $param = Types::TypeTiny::to_TypeTiny(shift);
-    return sub { $_->type->is_a_type_of($param) }
+    sub { $_->type->is_a_type_of($param) }
   },
   coercion_generator => sub {
     my ($parent, $child, $param) = @_;
@@ -165,7 +165,7 @@ declare ImmutableTypedHash =>
     }
 
  
-    return $c->freeze
+    $c->freeze
   };
 
 1;
