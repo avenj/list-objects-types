@@ -19,6 +19,7 @@ use strict; use warnings FATAL => 'all';
 
 { package
     Foo;
+  use Types::Standard -all;
   use List::Objects::Types -all;
   use List::Objects::WithUtils;
   use Moo;
@@ -48,6 +49,13 @@ use strict; use warnings FATAL => 'all';
     coerce => 1,
     default => sub { [] },
   );
+
+  has deeply => (
+    is  => 'ro',
+    isa => TypedHash[ TypedHash[Int] ],
+    coerce  => 1,
+    default => sub { +{} },
+  );
 }
 
 my $foo = Foo->new;
@@ -59,5 +67,13 @@ ok $foo->myhash->does('List::Objects::WithUtils::Role::Hash'),
   '->hash() ok';
 ok $foo->mycoercible->does('List::Objects::WithUtils::Role::Array'),
   '->mycoercible ok';
+
+ok $foo->deeply->does('List::Objects::WithUtils::Role::Hash::Typed'),
+  '->deeply ok'
+    or diag explain $foo->deeply;
+$foo->deeply->{bar}->{baz} = 1;
+ok $foo->deeply->get('bar')->get('baz') == 1,
+  'inner coercion ok'
+    or diag explain $foo->deeply;
 
 done_testing;
