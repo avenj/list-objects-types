@@ -127,6 +127,12 @@ ImmutableTypedHash can be parameterized with another type constraint, like
 
 Can be coerced from a plain HASH or an ["HashObj"](#HashObj).
 
+### InflatedHash
+
+An object that isa [List::Objects::WithUtils::Hash::Inflated](http://search.cpan.org/perldoc?List::Objects::WithUtils::Hash::Inflated).
+
+Can be coerced from a `HashRef` or `HashObj`.
+
 # AUTHOR
 
 Jon Portnoy <avenj@cobaltirc.org> with significant contributions from Toby

@@ -1,5 +1,9 @@
 Revision history for Perl module List-Objects-Types
 
+1.002001 2013-01-12
+
+  - Add InflatedHash type & coercion
+
 1.001001 2013-12-19
 
   - Bump to 1.x, interface should be fairly static

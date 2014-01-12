@@ -38,6 +38,11 @@ should_pass $htyped, TypedHash[Num];
 should_pass $htyped, TypedHash[Int];
 should_fail $htyped, TypedHash[GlobRef];
 
+# inflated
+my $inflated = hash(foo => 1, bar => 2)->inflate;
+should_pass $inflated, InflatedHash;
+should_fail $inflated, HashObj;
+
 # failures
 should_fail [],  ArrayObj;
 should_fail [],  ImmutableArray;
@@ -47,6 +52,8 @@ should_fail array(), TypedArray;
 should_fail +{}, HashObj;
 should_fail +{}, TypedHash;
 should_fail hash(), TypedHash;
+should_fail +{},    InflatedHash;
+should_fail hash(), InflatedHash;
 
 # unions
 should_pass [],       (ArrayRef | ArrayObj);
@@ -113,5 +120,14 @@ is_deeply(
   'ImmutableTypedHash inner coercions worked',
 );
 
+$coerced = InflatedHash->coerce(+{ foo => 1, bar => 2 });
+should_pass $coerced, InflatedHash;
+ok $coerced->foo == 1 && $coerced->bar == 2,
+  'HashRef coerced to InflatedHash ok';
+
+$coerced = InflatedHash->coerce( hash(foo => 1, bar => 2) );
+should_pass $coerced, InflatedHash;
+ok $coerced->foo == 1 && $coerced->bar == 2,
+  'HashObj coerced to InflatedHash ok';
 
 done_testing;
