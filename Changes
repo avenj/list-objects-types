@@ -1,5 +1,11 @@
 Revision history for Perl module List-Objects-Types
 
+1.002002 2013-01-12
+
+  - Skip a failing test on <5.16, for now
+
+  - POD fixes
+
 1.002001 2013-01-12
 
   - Add InflatedHash type & coercion
