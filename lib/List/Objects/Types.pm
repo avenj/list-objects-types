@@ -99,6 +99,14 @@ coerce ImmutableHash =>
   from HashObj() => via { immhash($_->export) };
 
 
+declare InflatedHash =>
+  as InstanceOf['List::Objects::WithUtils::Hash::Inflated'];
+
+coerce InflatedHash =>
+  from HashRef() => via { hash(%$_)->inflate },
+  from HashObj() => via { $_->inflate },
+
+
 declare TypedHash =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Hash::Typed' ],
   constraint_generator => sub {
@@ -301,6 +309,12 @@ ImmutableTypedHash can be parameterized with another type constraint, like
 L</TypedHash>.
 
 Can be coerced from a plain HASH or an L</HashObj>.
+
+=head3 InflatedHash
+
+An object that isa L<List::Objects::WithUtils::Hash::Inflated>.
+
+Can be coerced from a C<HashRef> or C<HashObj>.
 
 =head1 AUTHOR
 
