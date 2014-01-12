@@ -314,7 +314,7 @@ Can be coerced from a plain HASH or an L</HashObj>.
 
 An object that isa L<List::Objects::WithUtils::Hash::Inflated>.
 
-Can be coerced from a C<HashRef> or C<HashObj>.
+Can be coerced from a plain HASH or an L</HashObj>.
 
 =head1 AUTHOR
 
