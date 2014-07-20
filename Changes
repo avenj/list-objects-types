@@ -6,13 +6,13 @@ Revision history for Perl module List-Objects-Types
     should've been a semicolon caused a bad value to be passed to 'coerce'.
     Found by TOBYINK.
     
-1.002002 2013-01-12
+1.002002 2014-01-12
 
   - Skip a failing test on <5.16, for now
 
   - POD fixes
 
-1.002001 2013-01-12
+1.002001 2014-01-12
 
   - Add InflatedHash type & coercion
 
