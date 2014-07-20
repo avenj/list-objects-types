@@ -104,7 +104,7 @@ declare InflatedHash =>
 
 coerce InflatedHash =>
   from HashRef() => via { hash(%$_)->inflate },
-  from HashObj() => via { $_->inflate },
+  from HashObj() => via { $_->inflate };
 
 
 declare TypedHash =>
