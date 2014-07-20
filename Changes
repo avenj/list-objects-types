@@ -1,5 +1,11 @@
 Revision history for Perl module List-Objects-Types
 
+1.002003 2014-07-20
+
+  - Type-Tiny-0.46 sanity checks exposed that I'm an idiot; a comma that
+    should've been a semicolon caused a bad value to be passed to 'coerce'.
+    Found by TOBYINK.
+    
 1.002002 2013-01-12
 
   - Skip a failing test on <5.16, for now

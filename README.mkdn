@@ -43,33 +43,30 @@ List::Objects::Types - Type::Tiny-based types for List::Objects::WithUtils
 
 # DESCRIPTION
 
-A small set of [Type::Tiny](http://search.cpan.org/perldoc?Type::Tiny)\-based types & coercions for
-[List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils).
-
-Also see [MoopsX::ListObjects](http://search.cpan.org/perldoc?MoopsX::ListObjects), which provides [Moops](http://search.cpan.org/perldoc?Moops) class-building sugar
-with [List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils) integration.
+A set of [Type::Tiny](https://metacpan.org/pod/Type::Tiny)-based types & coercions matching the list objects found
+in [List::Objects::WithUtils](https://metacpan.org/pod/List::Objects::WithUtils).
 
 ### ArrayObj
 
-An object that consumes [List::Objects::WithUtils::Role::Array](http://search.cpan.org/perldoc?List::Objects::WithUtils::Role::Array).
+An object that consumes [List::Objects::WithUtils::Role::Array](https://metacpan.org/pod/List::Objects::WithUtils::Role::Array).
 
 Can be coerced from a plain ARRAY; a shallow copy is performed.
 
 ### HashObj
 
-An object that consumes [List::Objects::WithUtils::Role::Hash](http://search.cpan.org/perldoc?List::Objects::WithUtils::Role::Hash).
+An object that consumes [List::Objects::WithUtils::Role::Hash](https://metacpan.org/pod/List::Objects::WithUtils::Role::Hash).
 
 Can be coerced from a plain HASH; a shallow copy is performed.
 
 ### ImmutableArray
 
-An object that consumes [List::Objects::WithUtils::Role::Array::Immutable](http://search.cpan.org/perldoc?List::Objects::WithUtils::Role::Array::Immutable).
+An object that consumes [List::Objects::WithUtils::Role::Array::Immutable](https://metacpan.org/pod/List::Objects::WithUtils::Role::Array::Immutable).
 
-Can be coerced from a plain ARRAY or an ["ArrayObj"](#ArrayObj); a shallow copy is performed.
+Can be coerced from a plain ARRAY or an ["ArrayObj"](#arrayobj); a shallow copy is performed.
 
 ### TypedArray
 
-An object that consumes [List::Objects::WithUtils::Role::Array::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Role::Array::Typed).
+An object that consumes [List::Objects::WithUtils::Role::Array::Typed](https://metacpan.org/pod/List::Objects::WithUtils::Role::Array::Typed).
 
 Not coercible.
 
@@ -80,7 +77,7 @@ example, the type constraint `TypedArray[Num]` will accept
 `array_of(Num, 1, 2, 3.14159)`, and will also accept
 `array_of(Int, 1, 2, 3)` because `Int` is a subtype of `Num`.
 
-Can be coerced from a plain ARRAY or an ["ArrayObj"](#ArrayObj); a shallow copy is
+Can be coerced from a plain ARRAY or an ["ArrayObj"](#arrayobj); a shallow copy is
 performed. If the parameter also has a coercion, this will be applied
 to each item in the new array.
 
@@ -89,49 +86,61 @@ examples of parameterized & coercible TypedArrays.)
 
 ### ImmutableTypedArray
 
-An object that isa [List::Objects::WithUtils::Array::Immutable::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Array::Immutable::Typed).
+An object that isa [List::Objects::WithUtils::Array::Immutable::Typed](https://metacpan.org/pod/List::Objects::WithUtils::Array::Immutable::Typed).
 
 Not coercible.
 
 ### ImmutableTypedArray\[\`a\]
 
 ImmutableTypedArray can be parameterized with another type constraint, like
-["TypedArray"](#TypedArray).
+["TypedArray"](#typedarray).
 
-Can be coerced from a plain ARRAY or an ["ArrayObj"](#ArrayObj).
+Can be coerced from a plain ARRAY or an ["ArrayObj"](#arrayobj).
 
 ### TypedHash
 
-An object that consumes [List::Objects::WithUtils::Role::Hash::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Role::Hash::Typed).
+An object that consumes [List::Objects::WithUtils::Role::Hash::Typed](https://metacpan.org/pod/List::Objects::WithUtils::Role::Hash::Typed).
 
 Not coercible.
 
 ### TypedHash\[\`a\]
 
 TypedHash can be parameterized with another type constraint, like
-["TypedArray"](#TypedArray).
+["TypedArray"](#typedarray).
 
-Can be coerced from a plain HASH or a ["HashObj"](#HashObj). If the parameter also has a
+Can be coerced from a plain HASH or a ["HashObj"](#hashobj). If the parameter also has a
 coercion, this will be applied to each value in the new hash.
 
 ### ImmutableTypedHash
 
-An object that isa [List::Objects::WithUtils::Hash::Immutable::Typed](http://search.cpan.org/perldoc?List::Objects::WithUtils::Hash::Immutable::Typed).
+An object that isa [List::Objects::WithUtils::Hash::Immutable::Typed](https://metacpan.org/pod/List::Objects::WithUtils::Hash::Immutable::Typed).
 
 Not coercible.
 
 ### ImmutableTypedHash\[\`a\]
 
 ImmutableTypedHash can be parameterized with another type constraint, like
-["TypedHash"](#TypedHash).
+["TypedHash"](#typedhash).
 
-Can be coerced from a plain HASH or an ["HashObj"](#HashObj).
+Can be coerced from a plain HASH or an ["HashObj"](#hashobj).
 
 ### InflatedHash
 
-An object that isa [List::Objects::WithUtils::Hash::Inflated](http://search.cpan.org/perldoc?List::Objects::WithUtils::Hash::Inflated).
+An object that isa [List::Objects::WithUtils::Hash::Inflated](https://metacpan.org/pod/List::Objects::WithUtils::Hash::Inflated).
 
-Can be coerced from a plain HASH or an ["HashObj"](#HashObj).
+Can be coerced from a plain HASH or an ["HashObj"](#hashobj).
+
+## SEE ALSO
+
+[MoopsX::ListObjects](https://metacpan.org/pod/MoopsX::ListObjects) for integration with [Moops](https://metacpan.org/pod/Moops) class-building sugar.
+
+[List::Objects::WithUtils](https://metacpan.org/pod/List::Objects::WithUtils) for more on the relevant list objects.
+
+[Type::Tiny](https://metacpan.org/pod/Type::Tiny) for more on type methods & overloads.
+
+[Types::Standard](https://metacpan.org/pod/Types::Standard) for a set of useful base types.
+
+[Type::Library](https://metacpan.org/pod/Type::Library) for details on importing types.
 
 # AUTHOR
 
