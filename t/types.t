@@ -42,6 +42,8 @@ should_fail $htyped, TypedHash[GlobRef];
 my $inflated = hash(foo => 1, bar => 2)->inflate;
 should_pass $inflated, InflatedHash;
 should_fail $inflated, HashObj;
+should_pass $inflated, InflatedHash[qw/foo bar/];
+should_fail $inflated, InflatedHash[qw/foo bar baz/];
 
 # failures
 should_fail [],  ArrayObj;
