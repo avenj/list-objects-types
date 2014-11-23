@@ -130,6 +130,11 @@ An object that isa [List::Objects::WithUtils::Hash::Inflated](https://metacpan.o
 
 Can be coerced from a plain HASH or an ["HashObj"](#hashobj).
 
+### InflatedHash\[\`a\]
+
+InflatedHash can be parameterized with a list of methods expected to be
+available.
+
 ## SEE ALSO
 
 [MoopsX::ListObjects](https://metacpan.org/pod/MoopsX::ListObjects) for integration with [Moops](https://metacpan.org/pod/Moops) class-building sugar.

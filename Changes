@@ -1,5 +1,10 @@
 Revision history for Perl module List-Objects-Types
 
+1.003001 2014-11-23
+
+  - Add parameterized InflatedHash; InflatedHash[@methods] verifies that
+    @methods are available on the InflatedHash.
+
 1.002003 2014-07-20
 
   - Type-Tiny-0.46 sanity checks exposed that I'm an idiot; a comma that
