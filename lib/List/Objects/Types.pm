@@ -317,10 +317,14 @@ An object that isa L<List::Objects::WithUtils::Hash::Inflated>.
 
 Can be coerced from a plain HASH or an L</HashObj>.
 
+(Available from v1.2.1)
+
 =head3 InflatedHash[`a]
 
 InflatedHash can be parameterized with a list of methods expected to be
 available.
+
+(Available from v1.3.1)
 
 =head2 SEE ALSO
 
