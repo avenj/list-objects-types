@@ -1,5 +1,6 @@
 package List::Objects::Types;
-use strict; use warnings FATAL => 'all';
+
+use strict; use warnings;
 
 use Type::Library   -base;
 use Type::Utils     -all;
