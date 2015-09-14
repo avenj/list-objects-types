@@ -2,6 +2,8 @@ package List::Objects::Types;
 
 use strict; use warnings;
 
+use List::Util 'first';
+
 use Type::Library   -base;
 use Type::Utils     -all;
 use Types::Standard -types;
@@ -104,7 +106,7 @@ declare InflatedHash =>
   as InstanceOf['List::Objects::WithUtils::Hash::Inflated'],
   constraint_generator => sub {
     my @params = @_;
-    sub { Scalar::Util::blessed $_ and not grep(!$_[0]->can($_), @params) }
+    sub { Scalar::Util::blessed $_ and not first { !$_[0]->can($_) } @params }
   };
 
 coerce InflatedHash =>
