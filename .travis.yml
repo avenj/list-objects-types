@@ -12,7 +12,7 @@ language: perl
 env:
   global:
     - COVERAGE=0
-#    - AUTHOR_TESTING=0   # includes xt/
+    - AUTHOR_TESTING=0
 
 perl:
   - "5.10"
@@ -22,8 +22,6 @@ perl:
   - "5.18"
   - "5.20"
 #  - "blead"   # git
-
-env:
 
 matrix:
 #  include:
