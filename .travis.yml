@@ -4,6 +4,7 @@ notifications:
   irc:
     channels:
       - 'irc.cobaltirc.org#eris'
+      - 'irc.cobaltirc.org#perl'
     on_failure: always
     on_success: change
 
