@@ -7,6 +7,5 @@ on 'test' => sub {
 };
 
 on 'develop' => sub {
-  recommends "Moo" => "1";
-  recommends "MooX::late" => "0.014";
+  recommends "Moo" => "2";
 };

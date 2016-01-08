@@ -1,5 +1,13 @@
 Revision history for Perl module List-Objects-Types
 
+1.003002 2016-01-08
+
+  - Recommend (and test with, if available) Moo-2+
+
+  - Parameterized InflatedHash optimizations
+
+  - Switch to 'cpanfile' packaging
+
 1.003001 2014-11-23
 
   - Add parameterized InflatedHash; InflatedHash[@methods] verifies that

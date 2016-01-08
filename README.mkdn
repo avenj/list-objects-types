@@ -8,8 +8,7 @@ List::Objects::Types - Type::Tiny-based types for List::Objects::WithUtils
 
     use List::Objects::Types -all;
     use List::Objects::WithUtils;
-    use Moo;
-    use MooX::late;
+    use Moo 2;  # version 2+ for better Type::Tiny support
 
     has my_array => (
       is  => 'ro',
@@ -130,10 +129,14 @@ An object that isa [List::Objects::WithUtils::Hash::Inflated](https://metacpan.o
 
 Can be coerced from a plain HASH or an ["HashObj"](#hashobj).
 
+(Available from v1.2.1)
+
 ### InflatedHash\[\`a\]
 
 InflatedHash can be parameterized with a list of methods expected to be
 available.
+
+(Available from v1.3.1)
 
 ## SEE ALSO
 
