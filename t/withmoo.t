@@ -1,15 +1,15 @@
 BEGIN {
-  unless (eval {; require Moo; require MooX::late; 1 } && !$@) {
+  unless (eval {; require Moo; 1 } && !$@) {
     require Test::More;
     Test::More::plan(skip_all =>
-      'these tests require Moo and MooX::late'
+      'these tests require Moo-2+'
     );
   }
 
-  unless (eval {; MooX::late->VERSION(0.014) }) {
+  unless (eval {; Moo->VERSION(2) }) {
     require Test::More;
     Test::More::plan(skip_all =>
-      'these tests require MooX::late-0.014 or newer'
+      'these tests require Moo-2.x or newer'
     );
   }
 }
@@ -23,7 +23,6 @@ use strict; use warnings FATAL => 'all';
   use List::Objects::Types -all;
   use List::Objects::WithUtils;
   use Moo;
-  use MooX::late;
 
   has myarray => (
     is  => 'ro',

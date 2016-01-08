@@ -201,8 +201,7 @@ List::Objects::Types - Type::Tiny-based types for List::Objects::WithUtils
 
   use List::Objects::Types -all;
   use List::Objects::WithUtils;
-  use Moo;
-  use MooX::late;
+  use Moo 2;  # version 2+ for better Type::Tiny support
 
   has my_array => (
     is  => 'ro',
