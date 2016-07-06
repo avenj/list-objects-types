@@ -26,17 +26,23 @@ should_pass immhash(), ImmutableHash;
 my $typed = array_of(Int() => 1 .. 4);
 should_pass $typed, ArrayObj;
 should_pass $typed, TypedArray;
-should_pass $typed, TypedArray[Num];
 should_pass $typed, TypedArray[Int];
+should_fail $typed, TypedArray[Num];
 should_fail $typed, TypedArray[GlobRef];
+
+# immarray_of
+# FIXME
 
 # hash_of
 my $htyped = hash_of(Int() => ( foo => 1, baz => 2 ) );
 should_pass $htyped, HashObj;
 should_pass $htyped, TypedHash;
-should_pass $htyped, TypedHash[Num];
 should_pass $htyped, TypedHash[Int];
+should_fail $htyped, TypedHash[Num];
 should_fail $htyped, TypedHash[GlobRef];
+
+# immhash_of
+# FIXME
 
 # inflated
 my $inflated = hash(foo => 1, bar => 2)->inflate;

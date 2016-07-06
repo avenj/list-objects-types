@@ -35,7 +35,7 @@ declare TypedArray =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Array::Typed' ],
   constraint_generator => sub {
     my $param = Types::TypeTiny::to_TypeTiny(shift);
-    sub { $_->type->is_a_type_of($param) }
+    sub { $_->type->equals($param) }
   },
   coercion_generator => sub {
     my ($parent, $child, $param) = @_;
@@ -121,7 +121,7 @@ declare TypedHash =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Hash::Typed' ],
   constraint_generator => sub {
     my $param = Types::TypeTiny::to_TypeTiny(shift);
-    sub { $_->type->is_a_type_of($param) }
+    sub { $_->type->equals($param) }
   },
   coercion_generator => sub {
     my ($parent, $child, $param) = @_;
