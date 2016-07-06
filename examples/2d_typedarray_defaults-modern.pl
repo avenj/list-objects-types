@@ -1,6 +1,8 @@
 use feature 'say';
 # Original multidimensional TypedArray example courtesy of TOBYINK:
 #  http://www.perlmonks.org/?node_id=1052124
+# This is much like the Moops impl, but Function::Parameters over Kavorka and
+# less class-related sugar.
 
 package Cell {
   use Defaults::Modern;
