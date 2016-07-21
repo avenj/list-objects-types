@@ -28,7 +28,7 @@ use strict; use warnings FATAL => 'all';
     lazy   => 1, 
     is     => 'ro',
     isa    => TypedArray[Num],
-    builder => sub { [] },
+    builder => sub { die "Broken test; I shouldn't be called!" },
   );
 
   has mynums_coercible => (
@@ -36,7 +36,7 @@ use strict; use warnings FATAL => 'all';
     is     => 'ro',
     isa    => TypedArray[Num],
     coerce => 1,
-    builder => sub { [] },
+    builder => sub { die "broken test; I shouldn't be called!" },
   );
 }
 
