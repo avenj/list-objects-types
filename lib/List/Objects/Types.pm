@@ -12,7 +12,8 @@ use Types::TypeTiny ();
 use List::Objects::WithUtils;
 
 # FIXME reorg wrt Immutable types;
-#   declare ArrayObj as ImmutableArray & HashObj as ImmutableHash
+#   ::WithUtils needs v3 role reorg wrt moving common methods
+#   -> declare ArrayObj as ImmutableArray & HashObj as ImmutableHash
 
 declare ArrayObj =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Array' ];
