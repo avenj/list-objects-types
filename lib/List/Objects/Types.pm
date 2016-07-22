@@ -35,7 +35,7 @@ declare TypedArray =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Array::Typed' ],
   constraint_generator => sub {
     my $param = Types::TypeTiny::to_TypeTiny(shift);
-    sub { $_->type->is_a_type_of($param) }
+    sub { $_->type->equals($param) }
   },
   coercion_generator => sub {
     my ($parent, $child, $param) = @_;
@@ -121,7 +121,7 @@ declare TypedHash =>
   as ConsumerOf[ 'List::Objects::WithUtils::Role::Hash::Typed' ],
   constraint_generator => sub {
     my $param = Types::TypeTiny::to_TypeTiny(shift);
-    sub { $_->type->is_a_type_of($param) }
+    sub { $_->type->equals($param) }
   },
   coercion_generator => sub {
     my ($parent, $child, $param) = @_;
@@ -264,14 +264,20 @@ Not coercible.
 
 =head3 TypedArray[`a]
 
-TypedArray can be parameterized with another type constraint. For
-example, the type constraint C<< TypedArray[Num] >> will accept
-C<< array_of(Num, 1, 2, 3.14159) >>, and will also accept
-C<< array_of(Int, 1, 2, 3) >> because C<Int> is a subtype of C<Num>.
+TypedArray can be parameterized with another type constraint specifying the
+type of its values. 
 
 Can be coerced from a plain ARRAY or an L</ArrayObj>; a shallow copy is
 performed. If the parameter also has a coercion, this will be applied
 to each item in the new array.
+
+In versions prior to C<v2.x>, subtypes were permitted; C<< TypedArray[Num] >>
+would accept C<< array_of(Num, 1, 2, 3.14) >> as expected, but also C<<
+array_of(Int, 1, 2, 3) >> as C<Int> is a subtype C<Num>. This could lead to
+unexpected behavior. As of C<v2.1.1>, this has been corrected; the latter
+would be rejected without an appropriate coercion (for example, specifying C<<
+coerce => 1 >> in a Moo(se) attribute along these lines will coerce the
+C<Int>-typed array object to C<Num>)
 
 (The C<examples/> directory that comes with this distribution contains some
 examples of parameterized & coercible TypedArrays.)
@@ -285,7 +291,8 @@ Not coercible.
 =head3 ImmutableTypedArray[`a]
 
 ImmutableTypedArray can be parameterized with another type constraint, like
-L</TypedArray>.
+L</TypedArray> (however unlike its mutable counterpart, subtypes are
+accepted).
 
 Can be coerced from a plain ARRAY or an L</ArrayObj>.
 
