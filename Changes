@@ -1,5 +1,20 @@
 Revision history for Perl module List-Objects-Types
 
+2.001001 2016-07-22
+
+  - Parameterized TypedArray/TypedHash constraint generators now check
+    $type->equals and disallow subtypes (without coercion)
+  
+    Lyle Kopnicky observed that the behavior of parameterized
+    TypedArray/TypedHash could have unexpected results. Accepting
+    TypedArray[SubType] for an attribute that isa => TypedArray[Type] adds
+    unexpected constraints; subtypes are now disallowed for mutable types.
+
+    This implies coercion now works as-expected; for example, a Moo(se)
+    attribute declared as 'isa => TypedArray[Num], coerce => 1' will coerce an
+    array_of(Int) to Num, rather than the broken 1.x behavior of accepting the
+    subtype as-is.
+
 1.003002 2016-01-08
 
   - Recommend (and test with, if available) Moo-2+
